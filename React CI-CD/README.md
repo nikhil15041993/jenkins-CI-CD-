@@ -1,3 +1,4 @@
 
 
-![My Image ](images/ci.png, width="60%" height="50%")
+
+<img src="images/ci.png" height="400" width="400">
