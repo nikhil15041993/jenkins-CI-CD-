@@ -1,3 +1,3 @@
 
 
-![My Image](images/ci.png)| width=100
+![My Image](images/ci.png | width=100)
