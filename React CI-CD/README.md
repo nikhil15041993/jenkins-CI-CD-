@@ -1,3 +1,3 @@
 
 
-![My Image ](images/ci.png width="60%" height="50%")
+![My Image ](images/ci.png, width="60%" height="50%")
