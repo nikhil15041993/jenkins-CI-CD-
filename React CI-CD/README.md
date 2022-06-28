@@ -1,3 +1,3 @@
 
 
-![My Image](images/ci.png =250x250)
+![My Image](images/ci.png)| width=100
