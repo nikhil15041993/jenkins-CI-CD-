@@ -88,4 +88,4 @@ Save the configuration.
 
 
 
-<img src="img/Jenkins-build-a-specific-branch-on-GitHub.jpg" height="400" width="400">
+<img src="img/Jenkins-build-a-specific-branch-on-GitHub (1).jpg" height="500" width="500">
