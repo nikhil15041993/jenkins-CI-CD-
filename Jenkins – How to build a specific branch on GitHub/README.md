@@ -3,20 +3,21 @@
 
 ## Step 1: Install Generic Webhooks Trigger Plugin
 
-Login to your Jenkins installation setup and navigate to Manage Jenkins >> Manage Plugins and click on the Available tab and install Generic Webhook Trigger Plugin.
+* Login to your Jenkins installation setup and navigate to Manage Jenkins >> Manage Plugins and click on the Available tab and install``` Generic Webhook Trigger Plugin```.
 
-Restart Jenkins to use the plugin.
+* Restart Jenkins to use the plugin.
 
 ## Step 2: Setup GitHub Personal Access Token
-Login to your GitHub account and go to your account Settings >> Developer Settings >> Personal access tokens.
 
-Click Generate new token.
+* Login to your GitHub account and go to your account Settings >> Developer Settings >> Personal access tokens.
 
-Enter a note in the Note field.
+* Click Generate new token.
 
-Select repo.
+* Enter a note in the Note field.
 
-Click Generate token.
+* Select repo.
+
+* Click Generate token.
 
 Now a new token will be visible for this one time.
 
