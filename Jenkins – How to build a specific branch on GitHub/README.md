@@ -86,3 +86,6 @@ refs/heads/branch_name\srepository
 
 Save the configuration.
 
+
+
+<img src="img/Jenkins-build-a-specific-branch-on-GitHub.jpg" height="400" width="400">
