@@ -124,6 +124,21 @@ Below those two lines, add the ```sonar.jdbc.url```.
 ```
 sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube
 ```
+
+```
+########### OPTIONAL USE ONLY #############
+sonar.jdbc.username=sonar
+sonar.jdbc.password=sonar
+sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube
+sonar.web.host=127.0.0.1
+sonar.web.port=9000
+sonar.web.javaAdditionalOpts=-server
+sonar.search.javaOpts=-Xmx512m -Xms512m -XX:+HeapDumpOnOutOfMemoryError
+sonar.log.level=INFO
+sonar.path.logs=logs
+###########################################
+```
+
 Save and exit the file.
 
 Edit the sonar script file.
