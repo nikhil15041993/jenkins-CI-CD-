@@ -41,3 +41,11 @@ In this script the **scannerHome** is geting from SonarQube Scanner on global co
 **sonarqube_token** is getting from SonarQube servers part on Configure System part on jenkins.
 
 
+also we can disabel the
+```
+   script{
+        def scannerHome = tool 'sonarqube';
+        }
+```
+part if we install it automatically via jenkins ( same as maven we did )
+
