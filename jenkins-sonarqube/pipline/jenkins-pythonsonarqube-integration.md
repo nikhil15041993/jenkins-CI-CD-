@@ -36,8 +36,8 @@ pipeline{
 
 ```
 
-In this script the *scannerHome* is geting from SonarQube Scanner on global configuration tool on jenkins.
+In this script the **scannerHome** is geting from SonarQube Scanner on global configuration tool on jenkins.
 
-*sonarqube_token* is getting from SonarQube servers part on Configure System part on jenkins.
+**sonarqube_token** is getting from SonarQube servers part on Configure System part on jenkins.
 
 
