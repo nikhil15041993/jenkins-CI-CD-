@@ -38,3 +38,5 @@ sudo service jenkins start
 ```
 
 Everything should be good now.
+
+** If you are not able to find jenkins war file in standard path, you can goto Manage Jenkins → System Information, it will display the path to the .war file. **
