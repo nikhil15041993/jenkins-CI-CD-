@@ -33,7 +33,7 @@ Provide your email id and password in the SMTP authentication block and check th
 
 Check the email notification functionality by clicking the checkbox next to the ‘Test configuration by sending Test e-mail recipient’ option. Enter a valid email id and click the ‘Test configuration’ button to check whether the email id is valid or not.
 
-<img src="images/3.webp" height="400" width="400">
+<img src="images/4.png" height="400" width="400">
 
 
 For this demo, we will be using the Jenkins pipeline to write the Jenkins job. You can read the below blogs to understand Jenkins pipeline syntax better.
@@ -41,7 +41,7 @@ For this demo, we will be using the Jenkins pipeline to write the Jenkins job. Y
 
 To create a pipeline job in Jenkins go to new item > click on pipeline and provide the job name and click on the OK button.
 
-<img src="images/5.webp" height="400" width="400">
+<img src="images/4.webp" height="400" width="400">
 
 ```
 pipeline {
