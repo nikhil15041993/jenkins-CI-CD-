@@ -13,3 +13,5 @@ Follow the below steps to configure SMTP in your Jenkins instance.
 
 Goto manage Jenkins > configure systems
 
+<img src="images/image-1.webp" height="400" width="400">
+
