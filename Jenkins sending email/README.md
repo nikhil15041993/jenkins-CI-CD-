@@ -18,7 +18,7 @@ Goto manage Jenkins > configure systems
 
 Scroll down and lookup for ””E-mail Notification”
 
-<img src="images/2.webp" height="400" width="400">
+<img src="images/2.webp" height="200" width="300">
 
 
 Fill in the below details in SMTP configuration and click on the Save button.
