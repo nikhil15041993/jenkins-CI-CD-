@@ -44,3 +44,22 @@ To create a pipeline job in Jenkins go to new item > click on pipeline and provi
 
 <img src="images/4.webp" height="400" width="400">
 
+```
+pipeline {
+    agent any
+    
+    stages {
+        stage('Ok') {
+            steps {
+                echo "Ok"
+            }
+        }
+    }
+    
+    post{
+        always{
+           emailext attachLog: true, body: 'hai', subject: 'jenkins build pipeline', to: 'nikhil.s@ndimensionz.com'
+        }
+    }
+    
+```    
