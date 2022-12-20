@@ -1,4 +1,5 @@
 ```
+
 pipeline{
     
     agent any
@@ -49,8 +50,8 @@ pipeline{
         }
             
             
-            stage('Pushing to ECR') 
-            {
+        stage('Pushing to ECR') 
+           {
                  agent { 
                   label 'ec2'
                   }
@@ -65,16 +66,17 @@ pipeline{
             }
             
             
-            stage('stop previous containers') {
-                 agent { 
-                  label 'ec2'
-                  }
-         steps {
+        stage('stop previous containers') {
+        agent { label 'ec2' }
+        steps {
             sh 'docker ps -f name=mypythonContainer -q | xargs --no-run-if-empty docker container stop'
             sh 'docker container ls -a -fname=mypythonContainer -q | xargs -r docker container rm'
          }
        }
        
+
+
+   
        
        stage('Docker Run') {
             agent { 
@@ -94,3 +96,6 @@ pipeline{
     }
     
     ```
+    
+    
+    
