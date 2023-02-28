@@ -224,3 +224,24 @@ Access SonarQube in a web browser at your server's IP address on port 9000. For 
 ```
 http://192.0.2.123:9000
 ```
+
+### admin password reset
+
+
+You need to connect to sonar DB and change the admin password from there. For postgresql:
+
+```
+psql -h mysonar.dc9wocad9da.us-west-1.rds.amazonaws.com -p 5432 -U sonaruser sonardb
+
+```
+
+Then run the query:
+```
+update users set crypted_password = '88c991e39bb88b94178123a849606905ebf440f5', salt='6522f3c5007ae910ad690bb1bdbf264a34884c6d' where login = 'admin';
+```
+Your new admin pass is:
+```
+user: admin
+pass admin
+```
+
