@@ -55,11 +55,11 @@ First we want to setup our CRON job. Go to ‘Build Triggers’ tab, for this jo
 
 Next we want to add a script which will do the following;
 
-```
+
 * tar gzip the ‘jenkins_home’ directory
 * push our tar file to S3 bucket.
 * remove all files after successful upload.
-```
+  
 
 ```
 echo 'tar $JENKINS_HOME directory'
