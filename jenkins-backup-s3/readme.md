@@ -40,7 +40,7 @@ Manage Jenkins > Configure System > Global Properties > Environment Variables.
 eg: 
 NAME=AWS_ACCESS_KEY_ID
 VALUE=<YOUR_ACCESS_KEY_ID>
-
+```
 Now that we have our IAM user added to our environment we will be able to successfully upload to S3, lets create a new Jenkins job. Click ‘New item’ from the left nav panel of Jenkins.
 
 Lets call this job ‘jenkins-backup’ and choose ‘Freestyle project’ for project type.
@@ -51,13 +51,15 @@ We only have 2 configurations we need to add for the ‘jenkins-backup’ job;
 Build Triggers > Build Periodically
 Build > Execute Shell
 ```
-First we want to setup our CRON job. Go to ‘Build Triggers’ tab, for this job I want it to run every day at midnight, so we can set it to ‘0 0 * * *’.
+First we want to setup our CRON job. Go to ‘Build Triggers’ tab, for this job I want it to run every day at midnight, so we can set it to ‘0 0 * * *.
 
 Next we want to add a script which will do the following;
 
+```
 * tar gzip the ‘jenkins_home’ directory
 * push our tar file to S3 bucket.
 * remove all files after successful upload.
+```
 
 ```
 echo 'tar $JENKINS_HOME directory'
