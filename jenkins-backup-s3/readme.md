@@ -47,14 +47,13 @@ Lets call this job ‘jenkins-backup’ and choose ‘Freestyle project’ for p
 
 
 We only have 2 configurations we need to add for the ‘jenkins-backup’ job;
-```
-Build Triggers > Build Periodically
-Build > Execute Shell
-```
+
+* Build Triggers > Build Periodically
+* Build > Execute Shell
+
 First we want to setup our CRON job. Go to ‘Build Triggers’ tab, for this job I want it to run every day at midnight, so we can set it to ‘0 0 * * *.
 
 Next we want to add a script which will do the following;
-
 
 * tar gzip the ‘jenkins_home’ directory
 * push our tar file to S3 bucket.
