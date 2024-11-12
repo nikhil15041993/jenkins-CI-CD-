@@ -1,78 +1,88 @@
-## Step : Create the Jenkins Agent on the Jenkins Master
-Go to Jenkins Manage Jenkins:
+Here’s a more polished and structured version of your README in Markdown format:
 
-From the Jenkins dashboard, click on Manage Jenkins.
-Add New Node (Agent):
+---
 
-In Manage Jenkins, click Manage Nodes and Clouds.
+# Setting Up a Jenkins Agent on Ubuntu
 
-Click New Node.
+This guide walks you through creating a Jenkins Agent on your Jenkins Master and configuring it on an Ubuntu server.
 
-Enter a name for your agent (e.g., Ubuntu-Agent) and select Permanent Agent, then click OK.
-Configure the Agent:
+---
 
-Description: Optional, you can leave it empty or describe your agent.
-of executors: Set the number of concurrent jobs this agent can run (e.g., 1 for a basic setup).
+## Step 1: Create the Jenkins Agent on Jenkins Master
 
-Remote root directory: Specify the home directory on the agent where Jenkins will store files (e.g., /home/jenkins).
+1. **Access Manage Jenkins:**
+   - From the Jenkins dashboard, click **Manage Jenkins**.
 
-Labels: Optional, you can use labels to assign specific jobs to this agent.
+2. **Add a New Node (Agent):**
+   - Under **Manage Jenkins**, select **Manage Nodes and Clouds**.
+   - Click **New Node**.
+   - Enter a name for your agent (e.g., `Ubuntu-Agent`), select **Permanent Agent**, and click **OK**.
 
-Usage: Set to Use this node as much as possible to let Jenkins schedule jobs on this agent.
+3. **Configure the Agent:**
+   - **Description**: Optional; you can leave it empty or add a description.
+   - **# of Executors**: Set the number of concurrent jobs this agent can handle (e.g., `1`).
+   - **Remote Root Directory**: Specify the agent’s home directory where Jenkins will store files (e.g., `/home/jenkins`).
+   - **Labels**: Optional; use labels to assign specific jobs to this agent.
+   - **Usage**: Set to **Use this node as much as possible** to allow Jenkins to schedule jobs on this agent.
+   - **Launch Method**: Select **Launch agent via SSH**.
 
-Launch method: Select Launch agent via SSH.
+4. **Enter Agent Details:**
+   - **Host**: Enter the IP address or hostname of your Ubuntu server where the agent will run.
+   - **Credentials**: Click **Add** next to Credentials, and create a new SSH credential.
+     - **Username**: Typically `jenkins` or your server’s username.
+     - **Private Key**: Provide the SSH private key for access (or use a password if required).
 
-Enter Agent Details:
+5. **Save the Configuration**: Once all details are entered, click **Save**.
 
-Host: Enter the IP address or hostname of your Ubuntu server where the agent will run.
+---
 
-Credentials: Click Add next to Credentials and create a new SSH credential using the SSH Username with private key option. You can use a private key or password for authentication.
+## Step 2: Set Up the Jenkins Agent on the Ubuntu Server
 
-Username: Typically jenkins or your server username.
+1. **Install SSH on Ubuntu:**
+   ```bash
+   sudo apt install openssh-server -y
+   ```
 
-Private key: Provide the private key for SSH access (or use a password if necessary).
+2. **Verify SSH is Running:**
+   ```bash
+   sudo systemctl status ssh
+   ```
 
-Save the Configuration: Once you’ve filled in the necessary details, click Save.
+3. **Create a Jenkins User (if needed):**
+   ```bash
+   sudo adduser jenkins
+   sudo usermod -aG sudo jenkins
+   ```
 
-# Step 2: Set Up the Jenkins Agent on the Ubuntu Server
-Ensure SSH is installed on your Ubuntu server:
+4. **Configure SSH Keys (optional but recommended):**
+   - On the Jenkins master server, generate SSH keys:
+     ```bash
+     ssh-keygen -t rsa -b 2048 -f ~/.ssh/id_rsa
+     ```
+   - Copy the public key to the Ubuntu server:
+     ```bash
+     ssh-copy-id jenkins@<agent-server-ip>
+     ```
 
-```
-sudo apt install openssh-server -y
-```
-Verify SSH is running:
+---
 
-```
-sudo systemctl status ssh
-```
-Create a Jenkins user (if not already created):
+## Step 3: Launch the Agent on Ubuntu
 
-```
-sudo adduser jenkins
-sudo usermod -aG sudo jenkins
-```
-### Configure SSH Keys (optional but recommended):
+1. **Connect the Agent**:
+   - After completing the configuration on Jenkins, the agent should automatically connect to the Jenkins master.
+   - Go to **Manage Nodes** in Jenkins, and verify the new agent appears as online.
 
-### On the Jenkins master server, generate SSH keys:
+2. **Troubleshoot Connection Issues**:
+   - If the agent is not connecting, check SSH connectivity and review configurations on both ends.
+   - Check the agent logs in Jenkins by clicking the agent name under **Manage Nodes**.
 
-```
-ssh-keygen -t rsa -b 2048 -f ~/.ssh/id_rsa
-```
-Copy the public key to the Ubuntu server where the agent will run:
-```
-ssh-copy-id jenkins@<agent-server-ip>
-```
-# Step 3: Launch the Agent on Ubuntu
-Connect the Agent:
+---
 
-After setting everything up in Jenkins, the agent should automatically attempt to connect to the Jenkins master.
-Check the Manage Nodes page in Jenkins, and the new agent should appear as online.
-Verify Connection:
+## Step 4: Use the Agent in Jenkins Jobs
 
-If the agent is not coming online, verify the SSH connectivity and the configuration on both ends.
-You can also check the agent logs in Jenkins by clicking on the agent name in Manage Nodes.
-# Step 4: Use the Agent in Jenkins Jobs
-Now that the agent is set up, you can use it in Jenkins jobs:
+- **Assign Jobs to the Agent**:
+  - In the job configuration, go to **Restrict where this project can be run** and enter the label you assigned to the agent. This ensures specific jobs run on the designated agent.
 
-Assign Jobs to the Agent:
-In the job configuration, go to Restrict where this project can be run and enter the label you assigned to the agent. This ensures that specific jobs will run on the new agent.
+---
+
+This completes the setup of your Jenkins Agent on Ubuntu. Now you can assign jobs to the agent and enjoy the distributed workload in Jenkins!
