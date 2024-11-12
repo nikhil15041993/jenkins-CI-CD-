@@ -1,67 +1,78 @@
+## Step : Create the Jenkins Agent on the Jenkins Master
+Go to Jenkins Manage Jenkins:
 
-## Step 1 Configure Jenkins Master Credentials
+From the Jenkins dashboard, click on Manage Jenkins.
+Add New Node (Agent):
 
-Now choose the authentication method.
+In Manage Jenkins, click Manage Nodes and Clouds.
 
-```
-Kind: SSH Username with password
-Scope: Global
-Username: ubuntu
-Password: ubuntu
-```
+Click New Node.
 
+Enter a name for your agent (e.g., Ubuntu-Agent) and select Permanent Agent, then click OK.
+Configure the Agent:
 
-## Step 2 Add New Slave Nodes
+Description: Optional, you can leave it empty or describe your agent.
+of executors: Set the number of concurrent jobs this agent can run (e.g., 1 for a basic setup).
 
-On the Jenkins dashboard, click the ‘Manage Jenkins’ menu, and click ‘Manage Nodes’ and Click the ‘New Node’.
+Remote root directory: Specify the home directory on the agent where Jenkins will store files (e.g., /home/jenkins).
 
-Type the node name ‘test-jenkins-slave’, choose the ‘permanent agent’, and click ‘OK’.
+Labels: Optional, you can use labels to assign specific jobs to this agent.
 
+Usage: Set to Use this node as much as possible to let Jenkins schedule jobs on this agent.
 
-## Step 3  Edit Node Information Details.
+Launch method: Select Launch agent via SSH.
 
-Now type node information details.
+Enter Agent Details:
 
-```
-Description: test-jenkins-slave node agent server
-Remote root directory: /var/jenkins
-Labels: test-jenkins-slave
-Launch method: Launch slave agent via SSH,
-Host: ‘10.0.0.5’ (it’s my test-jenkins-slave external IP)
-Authentication: using ‘Jenkins’ credential. ( credential which we create earler)
-Host key verification : manualy trust
-```
+Host: Enter the IP address or hostname of your Ubuntu server where the agent will run.
 
-Now click ‘Save’ button and wait for the master server to connect to our agent nodes and launch the agent services.
+Credentials: Click Add next to Credentials and create a new SSH credential using the SSH Username with private key option. You can use a private key or password for authentication.
 
+Username: Typically jenkins or your server username.
 
-## On Agent Machine
--------------------------------------------------------------------------------------------------------------
+Private key: Provide the private key for SSH access (or use a password if necessary).
 
-### Step 1 install java
+Save the Configuration: Once you’ve filled in the necessary details, click Save.
+
+# Step 2: Set Up the Jenkins Agent on the Ubuntu Server
+Ensure SSH is installed on your Ubuntu server:
 
 ```
-sudo apt install default-jdk
+sudo apt install openssh-server -y
 ```
-
-### Step 2 create a Directory  /var/jenkins
-
-```
-sudo mkdir /var/jenkins
-```
-
-### Step 3 change permision to /var/jenkins
+Verify SSH is running:
 
 ```
-sudo chmod 777 /var/jenkins
+sudo systemctl status ssh
 ```
+Create a Jenkins user (if not already created):
 
+```
+sudo adduser jenkins
+sudo usermod -aG sudo jenkins
+```
+### Configure SSH Keys (optional but recommended):
 
+### On the Jenkins master server, generate SSH keys:
 
+```
+ssh-keygen -t rsa -b 2048 -f ~/.ssh/id_rsa
+```
+Copy the public key to the Ubuntu server where the agent will run:
+```
+ssh-copy-id jenkins@<agent-server-ip>
+```
+# Step 3: Launch the Agent on Ubuntu
+Connect the Agent:
 
+After setting everything up in Jenkins, the agent should automatically attempt to connect to the Jenkins master.
+Check the Manage Nodes page in Jenkins, and the new agent should appear as online.
+Verify Connection:
 
+If the agent is not coming online, verify the SSH connectivity and the configuration on both ends.
+You can also check the agent logs in Jenkins by clicking on the agent name in Manage Nodes.
+# Step 4: Use the Agent in Jenkins Jobs
+Now that the agent is set up, you can use it in Jenkins jobs:
 
-
-
-
-
+Assign Jobs to the Agent:
+In the job configuration, go to Restrict where this project can be run and enter the label you assigned to the agent. This ensures that specific jobs will run on the new agent.
